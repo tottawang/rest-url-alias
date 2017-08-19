@@ -7,22 +7,45 @@ import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Path("/api/users")
+import com.sample.filter.AliasMappingFilter;
+
+@Path("/api/{tenant}/users")
 @Produces("text/plain")
 public class SampleResource {
 
   @Autowired
   private SampleRepository sampleRepository;
 
+  /**
+   * Only return payload when alias is involved.
+   * 
+   * @param tenant
+   * @return
+   */
   @GET
-  public String getUsers() {
-    return sampleRepository.getUsers().toString();
+  public String getUsers(@PathParam("tenant") String tenant) {
+    if (tenant.equals(AliasMappingFilter.ALIAS_NAME)) {
+      return sampleRepository.getUsers().toString();
+    } else {
+      return "";
+    }
   }
 
+  /**
+   * Only return payload when alias is involved.
+   * 
+   * @param tenant
+   * @param id
+   * @return
+   */
   @GET
   @Path("{id}")
-  public String getUser(@PathParam("id") Long id) {
-    return sampleRepository.getUser(id).toString();
+  public String getUser(@PathParam("tenant") String tenant, @PathParam("id") Long id) {
+    if (tenant.equals(AliasMappingFilter.ALIAS_NAME)) {
+      return sampleRepository.getUser(id).toString();
+    } else {
+      return "";
+    }
   }
 
 }

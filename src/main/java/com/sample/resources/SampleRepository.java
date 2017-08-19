@@ -11,7 +11,6 @@ import com.sample.domain.User;
 public class SampleRepository {
 
   public List<User> getUsers() {
-    System.out.println("getUsers gets called");
     List<User> users = new ArrayList<>();
     users.add(new User(Long.valueOf(0L), "user0"));
     users.add(new User(Long.valueOf(1L), "user1"));
