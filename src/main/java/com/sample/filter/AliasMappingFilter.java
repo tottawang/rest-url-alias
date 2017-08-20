@@ -15,7 +15,7 @@ import javax.ws.rs.ext.Provider;
 public class AliasMappingFilter implements ContainerRequestFilter {
 
   public static final String ALIAS_TENANT = "alias";
-  public static final Long ALIAS_USER_ID = Long.valueOf(9999999);
+  public static final Long ALIAS_USER_ID = Long.valueOf(9999999L);
   private static final String USERS = "users";
   private static final String TENANTS = "tenants";
 
