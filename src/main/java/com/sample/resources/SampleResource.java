@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sample.filter.AliasMappingFilter;
 
-@Path("/api/{tenant}/users")
+@Path("/api/tenants/{tenant}/users")
 @Produces("text/plain")
 public class SampleResource {
 
@@ -24,7 +24,7 @@ public class SampleResource {
    */
   @GET
   public String getUsers(@PathParam("tenant") String tenant) {
-    if (tenant.equals(AliasMappingFilter.ALIAS_NAME)) {
+    if (tenant.equals(AliasMappingFilter.ALIAS_TENANT)) {
       return sampleRepository.getUsers().toString();
     } else {
       return "";
@@ -41,7 +41,8 @@ public class SampleResource {
   @GET
   @Path("{id}")
   public String getUser(@PathParam("tenant") String tenant, @PathParam("id") Long id) {
-    if (tenant.equals(AliasMappingFilter.ALIAS_NAME)) {
+    if (tenant.equals(AliasMappingFilter.ALIAS_TENANT)
+        && id.equals(AliasMappingFilter.ALIAS_USER_ID)) {
       return sampleRepository.getUser(id).toString();
     } else {
       return "";
